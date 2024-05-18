@@ -17,9 +17,17 @@ namespace GlazeWM.Domain.UserConfigs
   public class BatteryComponentConfig : BarComponentConfig
   {
     /// <summary>
-    /// Formatted text to display when the device is draining battery power.
+    /// Formatted text to display when the device is draining battery power with percentage greater than 80.
     /// </summary>
-    public string LabelDraining { get; set; } = "{battery_level}%";
+    public string LabelHigh { get; set; } = "{battery_level}% (high)";
+    /// <summary>
+    /// Formatted text to display when the device is draining battery power with percentage greater than 40.
+    /// </summary>
+    public string LabelMedium { get; set; } = "{battery_level}% (medium)";
+    /// <summary>
+    /// Formatted text to display when the device is draining battery power with percentage less than 40.
+    /// </summary>
+    public string LabelLow { get; set; } = "{battery_level}% (low)";
     /// <summary>
     /// Formatted text to display when the device is in power saving mode.
     /// </summary>

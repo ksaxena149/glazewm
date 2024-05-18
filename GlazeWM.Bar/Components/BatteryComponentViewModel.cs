@@ -41,7 +41,7 @@ namespace GlazeWM.Bar.Components
       // Display the battery level as a 100% if device has no dedicated battery.
       if (ps.BatteryFlag == 128)
         return XamlHelper.ParseLabel(
-          _config.LabelDraining,
+          _config.LabelHigh,
           CreateVariableDict(batteryLevel),
           this
         );
@@ -59,12 +59,31 @@ namespace GlazeWM.Bar.Components
           CreateVariableDict(batteryLevel),
           this
         );
-
-      return XamlHelper.ParseLabel(
-        _config.LabelDraining,
-        CreateVariableDict(batteryLevel),
-        this
-      );
+      int batteryLevelInt;
+      if (int.TryParse(batteryLevel, out batteryLevelInt) && batteryLevelInt >= 80)
+      {
+          return XamlHelper.ParseLabel(
+            _config.LabelHigh,
+            CreateVariableDict(batteryLevel),
+            this
+          );
+      }
+      else if (int.TryParse(batteryLevel, out batteryLevelInt) && batteryLevelInt >= 40)
+      {
+          return XamlHelper.ParseLabel(
+            _config.LabelMedium,
+            CreateVariableDict(batteryLevel),
+            this
+          );
+      }
+      else
+      {
+          return XamlHelper.ParseLabel(
+            _config.LabelLow,
+            CreateVariableDict(batteryLevel),
+            this
+          );
+      }
     }
 
     public static Dictionary<string, Func<string>> CreateVariableDict(string batteryLevel)
